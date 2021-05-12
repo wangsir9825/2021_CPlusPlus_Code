@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+// Student的_num和Person的_num构成隐藏关系，可以看出这样代码虽然能跑，但是非常容易混淆
+class Person
+{
+protected:
+	string _name = "小李子"; // 姓名
+	int _num = 111; // 身份证号
+};
+class Student : public Person
+{
+public:
+	void Print()
+	{
+		cout << " 姓名:" << _name << endl;
+		cout << " 身份证号:" << Person::_num << endl; //使用基类::基类成员 显示访问基类的同名成员
+		cout << " 学号:" << _num << endl; // 子类成员将屏蔽父类的同名成员
+	}
+protected:
+	int _num = 999; // 学号
+};
+void Test()
+{
+	Student s1;
+	s1.Print();
+};
+int main()
+{
+	Test();
+	return 0;
+}
