@@ -1,0 +1,17 @@
+#include <iostream>
+namespace N1 //定义命名空间N1
+{
+    int a = 10;
+}
+namespace N2 //定义命名空间N2
+{
+    int a = 30;
+}
+int main()
+{
+    int a = 50;
+    printf("N1::a = %d\n", N1::a); //输出命名空间N1中的成员变量a
+    printf("N2::a = %d\n", N2::a); //输出命名空间N2中的成员变量a
+    printf("a = %d\n",a);//输出主函数中的变量a
+    return 0;
+}
