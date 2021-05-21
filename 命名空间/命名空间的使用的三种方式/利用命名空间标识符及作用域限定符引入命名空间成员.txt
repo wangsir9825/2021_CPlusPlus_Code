@@ -1,0 +1,11 @@
+#include <iostream>//输入输出流头文件，注意头文件不带后缀.h
+namespace N {
+    int a = 10;
+}
+int main()
+{
+    int a = 30;
+    printf("命名空间N中的变量a = %d\n", N::a); //打印命名空间N中的变量a
+    printf("main函数中的变量a =  %d\n", a); //打印主函数中的变量a
+    return 0;
+}
