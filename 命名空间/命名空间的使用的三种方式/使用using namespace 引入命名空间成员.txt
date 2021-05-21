@@ -1,0 +1,20 @@
+#include <iostream>//输入输出流头文件，注意头文件不带后缀.h
+namespace N {
+    int a = 10;
+    int b = 20;
+    int Add(int left, int right)
+    {
+        return left + right;
+    }
+}
+
+using namespace N;//使用using namespace 引入命名空间成员
+int main()
+{
+    printf("a = %d\n", a);
+    b = 100;
+    printf("b = %d\n", b);
+    int c = Add(a, b);
+    printf("a+b = %d\n", c);
+    return 0;
+}
