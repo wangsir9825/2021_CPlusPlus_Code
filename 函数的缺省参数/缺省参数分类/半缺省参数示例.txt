@@ -1,0 +1,16 @@
+#include<iostream>
+using namespace std;
+
+void TestFunc3(int a, int b, int c = 30) {
+    cout << "a = " << a << endl;
+    cout << "b = " << b << endl;
+    cout << "c = " << c << endl;
+}
+int main()
+{
+    cout << "传入两个参数" << endl;
+    TestFunc3(1, 2);
+    cout << "传入三个参数" << endl;
+    TestFunc3(1, 2, 3);
+    return 0;
+}
