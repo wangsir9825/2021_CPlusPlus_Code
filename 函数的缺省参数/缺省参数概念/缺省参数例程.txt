@@ -1,0 +1,11 @@
+#include<iostream>
+using namespace std;
+
+void TestFunc1(int a = 0) {//参数默认值为0
+    cout << a << endl;
+}
+int main()
+{
+    TestFunc1(); // 没有传参时，使用参数的默认值
+    TestFunc1(10); // 传参时，使用指定的实参
+}
