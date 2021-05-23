@@ -1,0 +1,19 @@
+#include<iostream>
+using namespace std;
+void TestFunc2(int a = 10, int b = 20, int c = 30) {
+    cout << "a = " << a << endl;
+    cout << "b = " << b << endl;
+    cout << "c = " << c << endl;
+}
+int main()
+{
+    cout << "不传入参数" << endl;
+    TestFunc2();
+    cout << "传入一个参数" << endl;
+    TestFunc2(1);
+    cout << "传入两个参数" << endl;
+    TestFunc2(1, 2);
+    cout << "传入三个参数" << endl;
+    TestFunc2(1, 2, 3);
+    return 0;
+}
