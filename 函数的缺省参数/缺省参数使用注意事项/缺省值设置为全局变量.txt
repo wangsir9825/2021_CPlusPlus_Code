@@ -1,0 +1,16 @@
+#include<iostream>
+//#define MAX 100
+using namespace std;
+int Max = 100;
+void TestFunc5(int score = Max) {
+    cout << "score = " << score << endl;
+}
+int main()
+{
+    cout << "全局变量作为缺省值: ";
+    TestFunc5();
+    cout << "改变全局变量的值: ";
+    Max = 150;
+    TestFunc5();
+    return 0;
+}
