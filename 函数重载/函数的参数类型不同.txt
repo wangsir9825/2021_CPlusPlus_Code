@@ -1,0 +1,21 @@
+#include<iostream>
+using namespace std;
+double Add(double left, double right) { // 双精度浮点型加法函数
+    cout << "双精度浮点型加法函数： ";
+    return left + right;
+}
+int Add(int left, int right) { // 整型加法函数
+    cout << "整型加法函数： ";
+    return left + right;
+}
+long Add(long left, long right) { // 长整型加法函数
+    cout << "长整型加法函数： ";
+    return left + right;
+}
+int main()
+{
+    cout << Add(10, 20) << endl; // 调用整型加法函数
+    cout << Add(10.1, 20.3) << endl; // 调用双精度浮点型加法函数
+    cout << Add(100L, 200L) << endl; // 调用长整型加法函数
+    return 0;
+}
