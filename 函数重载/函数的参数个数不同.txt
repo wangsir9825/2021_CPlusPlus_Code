@@ -1,0 +1,22 @@
+#include<iostream>
+using namespace std;
+
+int Max(int a, int b, int c)
+{
+    if (b > a)
+        a = b;
+    if (c > a)
+        a = c;
+    return a;
+}
+int Max(int a, int b)
+{
+    return (a > b) ? a : b;
+}
+int main()
+{
+    int a = 1, b = 2, c = 3;
+    cout << "两个数中的最大值：" << Max(a, b) << endl;
+    cout << "三个数中的最大值：" << Max(a, b, c) << endl;
+    return 0;
+}
