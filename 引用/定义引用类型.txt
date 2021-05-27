@@ -1,0 +1,13 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+    int a = 10;
+    int& ra = a;
+    printf("a = %d\n", a);
+    printf("ra = %d\n", ra);
+    printf("\n变量a的地址是：%p\n引用ra的地址是：%p\n", &a, &ra);
+
+    return 0;
+}
