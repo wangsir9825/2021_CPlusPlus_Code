@@ -1,0 +1,37 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+    string str;
+    int n = 0;
+    int MAX_n = 0;//记录最长数字串的长度
+    getline(cin,str);//接收字符串
+    auto it = str.begin();
+    auto pstr = it;//记录数字串的起始位置
+    while(it != str.end())
+    {
+        if(*it >= '0' && *it <= '9')
+        {
+            ++n;
+        }
+        else{
+            if(MAX_n < n){
+                MAX_n = n;
+                pstr = it-n;
+            }
+            n = 0;//n清零
+        }
+        ++it;
+    }
+    if(MAX_n < n){
+        MAX_n = n;
+        pstr = it-n;
+    }
+    for(int i = 0; i < MAX_n; ++i)
+    {
+        cout << *(pstr + i);
+    }
+    return 0;
+}
