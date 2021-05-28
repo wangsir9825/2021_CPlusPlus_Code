@@ -1,0 +1,32 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+	string s1, s2;
+	getline(cin, s1);
+	getline(cin, s2);
+	auto it1 = s1.begin();
+	auto it2 = s2.begin();
+	while (it1 != s1.end())
+	{
+		auto begin = it2;
+		while (begin != s2.end())
+		{
+			if (*begin == *it1)
+			{
+				it1 = s1.erase(it1);
+				--it1;//由于erase函数的返回值是下一个位置
+			}
+			else
+			{
+				++begin;
+			}
+		}
+		++it1;
+	}
+	cout << s1 << endl;
+	system("pause");
+	return 0;
+}
