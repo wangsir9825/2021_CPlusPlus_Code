@@ -1,0 +1,33 @@
+#includeiostream
+using namespace std;
+void num2char(int num)数字转化为字符
+{
+    if(num = 10)
+    {
+        cout  (char)(num + 55);
+    }
+    else
+        cout  num;
+}
+void digui(int m, int n)
+{
+    if(m  n == 0)
+        num2char(m % n);
+    else
+    {
+        digui(m  n, n);
+        num2char(m % n);
+    }
+}
+int main()
+{
+    int m, n;
+    cin  m  n;
+    if (m0) 考虑负数
+    {
+        m=-m;
+        cout'-';
+    }
+    digui(m, n);
+    return 0;
+}
