@@ -1,0 +1,18 @@
+#include iostream
+using namespace std;
+
+int main()
+{
+    int a,b,c,d;
+    cin  a  b  c  d;
+    int A,B1,B2,C;
+    A = (a+c)2;
+    B1 = (b+d)2;
+    B2 = (c-a)2;
+    C = (d-b)2;
+    if(B1 == B2)
+        cout  A ' ' B1 ' ' C;
+    else
+        cout  No;
+    return 0;
+}
