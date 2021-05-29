@@ -1,0 +1,29 @@
+#include<iostream>
+#include<string> // string
+#include<algorithm> //reverse
+using namespace std;
+
+bool Hui_language(const string &s)// 回文判断
+{
+    //是回文返回1，不是返回0
+    int ret;
+    string b = s;
+	reverse(b.begin(), b.end());//反转字符串
+	if (s == b) return true;
+	else return false;
+}
+
+int main() {
+	string A, B;
+    int num = 0;//回文串的个数
+	cin >> A >> B;
+    for (int i = 0; i <= A.size(); ++i) // 当时就少了这个等号，让我调试了半天
+    {
+        string S(A); 
+        S.insert(i,B); //将B插入A中
+        if(Hui_language(S))
+            ++num;
+    }
+    cout << num;
+	return 0;
+}
