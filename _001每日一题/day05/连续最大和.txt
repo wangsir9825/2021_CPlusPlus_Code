@@ -1,0 +1,28 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    int n; // 元素个数
+    cin >> n;
+    vector<int> arr(n); //暂时理解为数组模板
+
+    for(int i = 0; i < n; ++i)
+    {
+        cin >> arr[i];
+    }
+    int max = arr[0]; // 最大和
+    int sum = 0;
+    for(int i = 0; i < arr.size(); ++i)
+    {
+        sum += arr[i];
+        if(max < sum)
+            max = sum;
+        if(sum < 0)
+            sum = 0;
+            
+    }
+    cout << max;    
+    return 0;
+}
