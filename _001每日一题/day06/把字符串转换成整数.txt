@@ -1,0 +1,59 @@
+#include "stdafx.h"
+#include<iostream>
+#include<vector>
+#include<string>
+#include<queue>
+#include<stack>
+#include<cstring>
+#include<string.h>
+#include<deque>
+using namespace std;
+class Solution {
+public:
+	int StrToInt(string str) {
+		//如果字符串为空，返回-1
+		if (str == "")return 0;
+		int num=0;//要输出的数字
+		int flag=1;//符号位，0表示负数，1表示正数
+		cout << str.find_first_not_of("1234567890+-") << endl;
+		if (str.find_first_not_of("1234567890+-") < str.size())  return 0;//如果存在不合法字符
+		char ch = str[0];
+		int i = 0;
+		//判断符合
+		if (ch == '-') 
+		{
+			flag = 0;//数字为负数
+			i = 1;
+		}
+		else if (ch == '+')
+		{
+			flag = 1;//为正数
+			i = 1;
+		}
+		else
+		{
+			i = 0;
+		}
+
+		while (i<str.size())
+		{
+			int a = str[i]-48; //char类型和int类型相差48
+			num = num * 10 + a;
+			cout << "num:" << num << endl;
+			i++;
+		}
+		if (flag == 0) num = -num;
+		return num;
+	}
+};
+
+int main()
+{
+	
+	Solution so;
+	vector<int> data = { 1,2,3,4,5,5,5,6,7,8};
+	int count = so.StrToInt("123");
+	cout << count << endl;
+	cout << endl;
+	return 0;
+}
