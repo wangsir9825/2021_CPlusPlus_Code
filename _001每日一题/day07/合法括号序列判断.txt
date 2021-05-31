@@ -1,0 +1,24 @@
+class Parenthesis {
+public
+    bool chkParenthesis(string A, int n) {
+         write code here
+        auto it = A.begin();
+        int z = 0; 左括号数量
+        while(it != A.end())只能包含括号字符判断，
+        {
+            if(it != '(' && it != ')')
+            {
+                return false;
+            }
+            统计左括号的数量
+            if(it == '(')
+                z++;
+            if(it == ')') 右括号与左括号相抵消
+                z--;
+            ++it;
+        }
+        if (z == 0) 如果左右括号能全部抵消，则括号串合法
+            return true;
+        return false;
+    }
+};
