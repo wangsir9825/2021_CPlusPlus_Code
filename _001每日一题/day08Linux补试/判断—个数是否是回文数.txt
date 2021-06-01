@@ -1,0 +1,29 @@
+#includeiostream
+#includestring  string
+#includealgorithm reverse
+using namespace std;
+
+bool Hui_language(const string &s) 回文判断
+{
+    是回文返回1，不是返回0
+    int ret;
+    string b = s;
+	reverse(b.begin(), b.end());反转字符串
+	if (s == b) return true;
+	else return false;
+}
+
+int main() {
+	string A, B;
+    int num = 0;回文串的个数
+	cin  num;
+    if (num  0)
+        num = -num;
+    string S = to_string(num) ;
+    
+    if(Hui_language(S))
+        cout  Yes;
+    else
+        cout  No;
+	return 0;
+}
