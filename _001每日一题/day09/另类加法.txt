@@ -1,0 +1,14 @@
+class UnusualAdd {
+public
+    int addAB(int A, int B) {
+         write code here
+        int carry;
+        do
+        {
+            carry = A & B;  计算进位
+            A = A ^ B;  计算两个数相加后每一位上的数值
+            carry = carry  1;
+        }while(carry);
+        return A;
+    }
+};
