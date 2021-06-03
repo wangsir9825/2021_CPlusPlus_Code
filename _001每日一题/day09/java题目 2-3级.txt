@@ -1,0 +1,23 @@
+#includeiostream
+using namespace std;
+ 
+int Go(int m, int n ) {
+	if (m  0  n  0) {
+		return 0;
+	}
+	else if (n == 1  m == 1) {
+		return 1;
+	}
+	else
+		return Go(n - 1, m) + Go(n, m - 1);
+}
+ 
+int main()
+{
+	int m, n;
+	cin  m  n;
+	Go( m, n);
+	cout  Go(m,n)  endl;
+	system(pause);
+	return 0;
+}
