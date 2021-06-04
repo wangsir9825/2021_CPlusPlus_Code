@@ -1,0 +1,87 @@
+#include iostream
+#include string
+using namespace std;
+int GetPwdSecrityLevel(string str)
+{
+    int grade = 0;
+    int letter = 0;
+    int LETTER = 0;
+    int num = 0;
+    int symbol = 0;
+    
+    int len = str.size();
+    if(len = 8)
+        grade += 25;
+    else if(len = 5)
+        grade += 10;
+    else 
+        grade += 5;
+    for (int i = 0; i  len; ++i) 
+    {
+        if(str[i] = 'A' && str[i] = 'Z') 大写字母判断
+            LETTER++;
+        else if (str[i] = 'a' && str[i] = 'z')
+            letter++;
+        else if(str[i] = '0' && str[i] = '9')
+            num++;
+        else
+            symbol++;
+    }
+    
+    
+    if(letter == 0 && LETTER == 0)  没有字母
+        grade+=0;
+    else if(letter != 0 && LETTER != 0)  大小写字母混合
+        grade+=20;
+    else   只有小写字母 只有大写字母
+        grade+=10;
+
+    
+    if(num == 0)  没有数字
+        grade+=0;
+    else if((num == 1))  只有一个数字
+        grade+=10;
+    else  数字个数大于1
+        grade+=20;
+    
+    if(symbol == 0)  没有符号
+        grade+=0;
+    else if((symbol == 1))  只有一个符号
+        grade+=10;
+    else  符号个数大于1
+        grade+=25;
+
+    if(letter != 0 && LETTER != 0 && num != 0 && symbol != 0)  混合字母、数字和符号
+        grade+=5;
+    else if((letter != 0  LETTER != 0 ) && num != 0 && symbol != 0)  字母、数字和符号
+        grade+=3;
+    else if((letter != 0  LETTER != 0 ) && num != 0)  只有字母和数字
+        grade+=2;
+    cout  letter     LETTER     num     symbol     grade  endl;
+    return grade;
+}
+
+
+int main()
+{
+    string str;
+   
+    while(cin  str)
+    {
+        int grade = GetPwdSecrityLevel(str);
+        if(grade = 90)
+            cout  VERY_SECURE  endl; 当时就是忘了输入endl这个鬼浪费了我很长时间，所以牛客刷题一定要注意输出结果的格式o(╥﹏╥)o
+        else if(grade = 80)
+            cout  SECURE  endl;
+        else if(grade = 70)
+            cout  VERY_STRONG  endl;
+        else if(grade = 60)
+            cout  STRONG  endl;         else if(grade = 50)
+            cout  AVERAGE  endl;
+        else if(grade = 25)
+            cout  WEAK  endl;
+        else if(grade = 0)
+            cout  VERY_WEAK  endl;
+    }
+    return 0;
+}
