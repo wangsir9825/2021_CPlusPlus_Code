@@ -1,0 +1,17 @@
+class Board {
+public
+    bool checkWon(vectorvectorint  board) {
+         write code here
+        if (board[0][0] + board[1][1] + board[2][2] == 3 )  主对角线检测
+            return true;
+        if (board[0][2] + board[1][1] + board[2][0] == 3 )  副对角线检测
+            return true;
+        for(int i = 0;i  3;i++){
+            if (board[i][0] + board[i][1] + board[i][2] == 3 )  行检测
+                return true;
+            if (board[0][i] + board[1][i] + board[2][i] == 3 )  列检测
+                return true;
+        }
+        return false;
+    }
+};
