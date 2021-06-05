@@ -1,0 +1,29 @@
+#include iostream
+using namespace std;
+
+int main()
+{
+    int byt = 0;
+    while(cin  byt)
+    {
+        int max = 0;
+        int n = 0;
+        while(byt)
+        {
+            if (byt%2)
+                n++;
+            else
+            {
+                if (max  n)
+                    max = n;
+                n = 0;
+            }
+            byt = 2;
+        }
+        if (max  n)
+            max = n;
+        cout  max  endl;
+    }
+
+    return 0;
+}
