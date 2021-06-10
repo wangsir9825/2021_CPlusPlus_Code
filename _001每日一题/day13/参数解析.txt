@@ -1,0 +1,46 @@
+#include iostream
+#include string
+using namespace std;
+
+int main()
+{
+    string str1;
+    string str2;
+    cin  str2;
+    int n = 0;  记录参数个数
+    bool flag = true;
+    while(cin  str1)
+    {
+        int size = str1.size();
+        int i = 0;
+        if(str1[i] == '' && str1[size-1] == ''){ 两头都有分号
+            while(str1[++i] != '')
+            {
+                str2 = str2 + str1[i];
+            }
+            str2 = str2 + n;
+            n++;
+        }
+        else if(str1[i] == ''){ 开头有分号
+            n++;
+            while(str1[++i] != '0')
+            {
+                str2 = str2 + str1[i];
+            }
+            str2 = str2 +  ;
+        }
+        else if(str1[size-1] == ''){ 结尾有分号
+            while(str1[i] != '')
+            {
+                str2 = str2 + str1[i++];
+            }
+            str2 = str2 + n;
+        }
+        else{
+            n++;
+            str2 = str2 + str1 + n;
+        }
+    }
+    cout  n  endl  str2  endl;
+    return 0;
+}
