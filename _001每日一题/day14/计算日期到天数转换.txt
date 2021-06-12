@@ -1,0 +1,22 @@
+#includeiostream
+using namespace std;
+int main()
+{
+    static int monthdays[13]={0,31,28,31,30,31,30,31,31,30,31,30,31};
+    int year,month,day;
+   while (cinyearmonthday){
+  
+    int num=0;
+    for (int i=0; imonth; i++)
+    {
+        num+=monthdays[i];
+    }
+     num+=day;
+     if ((month2)&&(year%4 == 0 && year% 100 !=0) ( year%400==0))
+    {
+        num+=1;
+    }
+    coutnumendl;
+    }
+    return 0;
+}
