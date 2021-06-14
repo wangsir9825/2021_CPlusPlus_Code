@@ -1,0 +1,27 @@
+class Gloves {
+public
+    int findMinimum(int n, vectorint left, vectorint right) {
+         write code here
+        int left_sum=0,right_sum=0;
+        int left_min=INT_MAX,right_min=INT_MAX;
+        int sum=0;
+        for(int i=0;in;i++)
+        {
+            if(0==left[i]right[i])
+            {
+                sum=sum+left[i]+right[i];
+            }
+            else
+            {
+                left_sum+=left[i];
+                if(left[i]left_min)
+                    left_min=left[i];
+                    
+                right_sum+=right[i];
+                if(right[i]right_min)
+                    right_min=right[i];    
+            }
+        }
+        return sum+min(left_sum-left_min+1,right_sum-right_min+1)+1;
+    }
+};
