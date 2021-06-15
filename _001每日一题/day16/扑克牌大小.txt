@@ -1,0 +1,51 @@
+#define _CRT_SECURE_NO_WARNINGS
+ 
+#include stdio.h
+#include stdlib.h
+#include string.h
+ 
+int infoCard(char a)
+{
+	int info = (int)calloc(2, sizeof(int));	info[0]代表手中牌的数目，info[1]代表手中最小牌的大小
+	if (a == 'j'){	如果是小王的话
+		info[0] = 6;
+		return info;
+	}
+	switch (a){	info[1]代表牌面大小
+	case '1' info[1] = 10; break;	数字10
+	case 'A' info[1] = 14; break;	A
+	case '2' info[1] = 15; break;	数字2
+	case 'J' info[1] = 11; break;	J
+	case 'Q' info[1] = 12; break;	Q
+	case 'K' info[1] = 13; break;	K
+	default info[1] = a - '0';	3~9
+	}
+	while (a)		info[0]记录每个人手中有几张牌
+		if ((a++) == ' ')
+			++info[0];
+ 
+	++info[0];
+	return info;
+}
+int main(int argc, char const argv[])
+{
+	char a[64], b[64];
+	scanf(%[^-]-%[^n], a, b); a、b分别代表左手牌和右手牌
+	int ai = infoCard(a), bi = infoCard(b);
+	if (ai[0] == 6)	a是对王
+		printf(%sn, a);
+	else if (bi[0] == 6)	b是对王
+		printf(%sn, b);
+	else if (ai[0] == bi[0])	a和b牌数一样多
+		printf(%sn, ai[1]  bi[1]  a  b);	比较最小的一张牌面大小
+	else if (ai[0] == 4)		除了炸弹和对王可以和私有牌比较关系之外，其他类型的牌只能和同种类型的存在比较关系
+		printf(%sn, a);
+	else if (bi[0] == 4)
+		printf(%sn, b);
+	else
+		printf(ERRORn);
+ 
+	free(ai);
+	free(bi);
+	return 0;
+}
