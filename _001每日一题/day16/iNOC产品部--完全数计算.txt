@@ -1,0 +1,22 @@
+#include iostream
+using namespace std;
+
+int main()
+{
+    int n;
+    while(cin  n)
+    {
+        int num = 0;
+        for(int i = 5; i = n; ++i){
+            int k = 0;
+            for(int j = 1; j = i2; ++j){ 求约数
+                if(i%j == 0)
+                    k += j;
+            }
+            if(k == i)
+                num++;
+        }
+        cout  num  endl;
+    }
+    return 0;
+}
