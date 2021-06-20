@@ -1,0 +1,28 @@
+#includeiostream
+using namespace std;
+class Test {
+public
+    void setvalue(int dat)
+    {
+        _value = dat;
+    }
+     获取私有变量
+    int Getvalue()
+    {
+        return _value;
+    }
+private
+    int _value;   私有成员变量
+};
+int main()
+{
+    Test t1;
+
+    t1._value = 10;  错误，试图直接访问私有成员变量
+
+ 间接访问私有成员
+    t1.setvalue(10);  直接调用成员函数setvalue，用于初始化私有成员
+    int data = t1.Getvalue();  获取私有变量
+    cout  data  endl;
+    return 0;
+}
