@@ -1,0 +1,18 @@
+#includeiostream
+using namespace std;
+class Clas  类
+{
+    int a = 1;  私有成员变量
+};
+struct Stru  结构体
+{
+    int b = 2;  公有成员变量
+};
+int main()
+{
+    Clas c1;
+    Stru s1;
+    cout  c1 =   c1.a  endl;  错误无法直接访问私有成员
+    cout  s1.b =   s1.b  endl;
+    return 0;
+}
