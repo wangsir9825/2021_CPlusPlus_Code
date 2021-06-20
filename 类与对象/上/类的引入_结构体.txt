@@ -1,0 +1,35 @@
+#define _CRT_SECURE_NO_WARNINGS 0
+#include <iostream>
+#include <string.h>
+
+using namespace std;
+struct Student
+{
+    void SetStudentInfo(const char* name, int age ,
+    const char* sex, const char* Stu_ID) // 设置学生信息
+    {
+        strcpy(_name, name);
+        _age = age;
+        strcpy(_sex, sex);
+        strcpy(_Stu_ID, Stu_ID);
+    }
+
+    void PrintStudentInfo() //打印学生信息
+    {
+        cout << _name << " " << _age << " " << _sex << " " << _Stu_ID << endl;
+    }
+
+    char _name[20];     // 姓名
+    int _age;           // 年龄
+    char _sex[3];       // 性别
+    char _Stu_ID[10];   // 学号
+};
+int main()
+{
+    Student stu1, stu2;
+    stu1.SetStudentInfo("张三", 18, "男", "123456");
+    stu2.SetStudentInfo("李四", 19, "男", "123457");
+    stu1.PrintStudentInfo();
+    stu2.PrintStudentInfo();
+    return 0;
+}
