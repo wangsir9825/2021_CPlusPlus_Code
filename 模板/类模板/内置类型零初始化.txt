@@ -1,0 +1,12 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+    int a = int(); 
+    char ch = char();
+    double d = double();  //0.0000000
+    float f = float();
+
+    return 0;
+}
