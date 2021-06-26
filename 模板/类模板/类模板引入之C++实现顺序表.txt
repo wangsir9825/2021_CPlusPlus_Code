@@ -1,0 +1,56 @@
+#include<iostream>
+using namespace std;
+
+// 类模板
+template<class Type>
+class SeqList // 注意SeqList只是类名，不是类
+{
+public:
+    SeqList(int sz = 8)
+    {
+        capacity = sz > SEQLIST_DEFAULT_SIZE ? sz : SEQLIST_DEFAULT_SIZE; // 保证开辟的空间不小于8
+        base = new Type[capacity];  // 开辟可以保存capacity个Type类型元素的空间
+        assert(base != NULL);
+        size = 0;
+    }
+    ~SeqList()
+    {
+        delete[]base;
+        base = nullptr;
+        capacity = size = 0;
+    }
+public:
+    bool full()const// 判断顺序表是否满了
+    {
+        return size >= capacity;
+    }
+public:
+    void push_back(const Type& x);
+    //{
+    //	assert(!full());
+    //	base[size++] = x;
+    //}
+private:
+    //enum{SEQLIST_DEFAULT_SIZE = 8}; // 枚举常量
+    const int SEQLIST_DEFAULT_SIZE = 8; //常变量，建议写这个，因为支持类型检查
+private:
+    Type* base; // 指向空间的指针
+    size_t capacity; // 开辟的空间大小
+    size_t size; // 已使用的空间
+};
+
+// 注意：在类外实现成员函数的格式如下所示
+template<class Type>
+void SeqList<Type>::push_back(const Type& x)
+{
+    assert(!full());
+    base[size++] = x;
+}
+
+int main()
+{
+    SeqList<int> mylist(10); // SeqList<int>属于类
+    SeqList<char> youlist(5); // SeqList<char>也是类
+    SeqList<SeqList<int>> hilist; // 相当于二维链表
+    return 0;
+}
