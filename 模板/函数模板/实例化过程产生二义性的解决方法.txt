@@ -1,0 +1,19 @@
+#include<iostream>
+using namespace std;
+template<typename Type>
+Type Fun(Type a, Type b)
+{
+    Type value = a + b;
+    return value;
+}
+int main()
+{
+    int a = 1;
+    double b = 2.2;
+    //Fun(a, b); //此处会出错，因为产生二义性（Type的类型不确定）\
+    // 解决二义性的两种方式：
+    Fun(a, (int)b); //强制类型转换
+    Fun<int>(a, b); //显式实例化
+    
+    return 0;
+}
