@@ -1,0 +1,8 @@
+class Solution {
+public:
+    int Sum_Solution(int n) {
+        int res = n;
+        res && ( res = res + Sum_Solution(n-1) ); // 利用&&的短路判断是否迭代结束
+        return  res;
+    }
+};
