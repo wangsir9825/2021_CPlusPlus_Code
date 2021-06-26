@@ -1,0 +1,21 @@
+#include<iostream>
+using namespace std;
+template<typename Type>
+Type Fun(Type a, Type b)
+{
+    Type value = a + b;
+    return value;
+}
+int Fun(int a, int b) // 与函数模板构成函数重载
+{
+    int value = a + b;
+    return value;
+}
+int main()
+{
+    Fun(1, 2); // 根据最佳匹配原则优先调用Fun(int a, int b)
+    Fun(1.1, 2.2); //调用函数模板，用以生成对应的模板函数
+    Fun<int>(1, 2); // 显示实例化，只能调用函数模板
+    Fun(1, 2.2);// 调用Fun(int a, int b)，并在函数中进行隐式类型转换
+    return 0;
+}
