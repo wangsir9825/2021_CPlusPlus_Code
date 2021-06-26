@@ -1,0 +1,15 @@
+#include<iostream>
+using namespace std;
+template<typename Type>
+Type Fun(Type a, Type b)
+{
+    Type value = a + b;
+    return value;
+}
+int main()
+{
+    Fun(1, 2); // 生成模板函数时会进行隐式实例化
+
+    Fun<int>(3, 4); // 显示实例化
+    return 0;
+}
