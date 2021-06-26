@@ -1,0 +1,19 @@
+#include<iostream>
+using namespace std;
+template<class Type1, class Type2>
+void Swap(Type1& a, Type2& b)
+{
+    Type1 tmp = a;
+    a = b;  //int = double
+    b = tmp;
+}
+
+int main()
+{
+    int a = 10;
+    double b = 23.45; 
+    cout << "a = " << a << "    b = " << b << endl;
+    Swap(a, b);
+    cout << "a = " << a << "    b = " << b << endl;
+    return 0;
+}
