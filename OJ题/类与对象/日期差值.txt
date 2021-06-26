@@ -1,0 +1,157 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+class Date
+{
+public:
+	friend ostream& operator<<(ostream& out, const Date& d);
+    friend istream& operator>>(istream& in, Date& d);
+	// 获取某年某月的天数
+	int GetMonthDay(int year, int month)
+	{
+		int days[13] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+		int day = days[month];
+		if (month == 2
+			&& ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)))
+		{
+			day += 1;
+		}
+		return day;
+	}
+	// 全缺省的构造函数
+	Date(int year = 1900, int month = 1, int day = 1)
+	{
+		_year = year;
+		_month = month;
+		_day = day;
+	}
+    
+	// 日期+天数
+	Date operator+(int day)
+	{
+		int y = _year, m = _month, d = _day;
+		while (day)
+		{
+            if (day >= GetMonthDay(y, m))
+            {
+                day -= GetMonthDay(y, m);
+                if (m == 12) // 如果满12个月，则清零，年加1
+                {
+                    m = 1;
+                    y++;
+                }
+                else
+                    m++;
+            }
+            else
+            {
+				if (d >= GetMonthDay(y, m)) //加过的天数如果大于本月的天数
+				{
+					d = 1;
+					m++;
+				}
+                else
+				    d++;
+				day--;
+            }
+        }
+		return Date(y, m, d); // 返回临时对象
+	}
+	bool operator>(const Date& d)
+	{
+		if (_year > d._year 
+			|| (_year == d._year && _month > d._month)
+			|| (_year == d._year && _month == d._month && _day > d._day))
+			return true;
+		return false;
+	}
+	// 日期-日期 返回天数
+	int operator-(const Date& d)
+	{
+		int n = 0;
+		static int days[13] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+		int m = _month;
+		if (*this > d)
+		{
+			// 年
+			n += (_year - d._year) * 365;
+			// 月
+			if (_month > d._month)
+			{
+				m = d._month;
+				for (; m < _month; ++m)
+				{
+					n += GetMonthDay(d._year, d._month);
+				}
+			}
+			else
+			{
+				m = _month;
+				for (; m > d._month; ++m)
+				{
+					n -= GetMonthDay(d._year, d._month);
+				}
+			}
+			// 日
+			n += _day - d._day + 1;
+		}
+        else
+        {
+			// 年
+			n += (d._year - _year) * 365;
+			// 月
+			if (d._month > _month)
+			{
+				m = _month;
+				for (; m < d._month; ++m)
+				{
+					n += GetMonthDay(_year, _month);
+				}
+			}
+			else
+			{
+				m = d._month;
+				for (; m > d._month; ++m)
+				{
+					n -= GetMonthDay(_year, _month);
+				}
+			}
+			// 日
+			n += d._day - _day + 1;
+        }
+		return n;
+	}
+private:
+	int _year;
+	int _month;
+	int _day;
+};
+ostream& operator<<(ostream& out, const Date& d)
+{
+    cout.fill('0');
+	out << d._year << "-" << setw(2) << 
+        internal << d._month << "-" << setw(2) << internal << d._day;
+	return out;
+}
+istream& operator>>(istream& in, Date& d)
+{
+    in >> d._year >> d._month >> d._day;
+    return in;
+}
+int main()
+{
+    int m, days;
+    char a[9],b[9];
+    int year,month,day,year1,month1,day1;
+    Date t1;
+    while(cin>>a>>b)
+    {
+        sscanf(a,"%4d%2d%2d",&year,&month,&day);//格式化读入
+        sscanf(b,"%4d%2d%2d",&year1,&month1,&day1);
+        Date t1(year, month, day);
+        Date t2(year1, month1, day1);
+        cout << t1-t2 << endl;
+    }
+    
+    return 0;
+}
