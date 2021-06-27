@@ -1,0 +1,21 @@
+#include<iostream>
+using namespace std;
+// 只有成员函数的类
+class A1 {
+public:
+    void f2() 
+    {
+        cout << "Hello world!" << endl;
+    }
+};
+
+// 类中什么都没有的类称为空类
+class A2
+{};
+
+int main()
+{
+    cout << "sizeof(A1) = " << sizeof(A1) << endl; // 计算类的大小
+    cout << "sizeof(A2) = " << sizeof(A2) << endl; // 计算空类的大小
+    return 0;
+}
