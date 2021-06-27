@@ -1,0 +1,26 @@
+#define _CRT_SECURE_NO_WARNINGS 0
+#include<iostream>
+using namespace std;
+class CGoods
+{
+public:
+    void InitGoods(CGoods* _this, const char* name, int count, float price)
+    {
+        strcpy(_this->_name, name);
+        _this->_count = count;
+        _this->_price = price;
+        _this->_total_price = _this->_price * _this->_count;
+    }
+private:
+    char _name[10];
+    int _count;
+    float _price;
+    float _total_price;
+};
+int main()
+{
+    CGoods  c1, c2;
+    c1.InitGoods(&c1, "C++", 10, 50);
+    c2.InitGoods(&c2, "Java", 8, 56);
+    return 0;
+}
