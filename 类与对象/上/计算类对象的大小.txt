@@ -1,0 +1,22 @@
+#include<iostream>
+using namespace std;
+class Test
+{
+public:
+    void SetData(int data)
+    {
+        m_data = data;
+    }
+private:
+    int m_data;     //4 + 4
+    double m_value; //8
+    char m_char;    //1 + 7
+};
+
+int main()
+{
+    Test t1;
+    cout << "Test类的大小为:" << sizeof(Test) << endl;
+    cout << "t1对象大小为:" << sizeof(t1) << endl;
+    return 0;
+}
