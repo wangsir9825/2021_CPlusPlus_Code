@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+class Date
+{
+public:
+    // 1.无参构造函数
+    Date()
+    {}
+
+    // 2.带参构造函数
+    Date(int year, int month, int day)
+    {
+        _year = year;
+        _month = month;
+        _day = day;
+    }
+private:
+    int _year;
+    int _month;
+    int _day;
+};
+
+int main()
+{
+    Date d1; // 调用无参构造函数
+    Date d2(2015, 1, 1); // 调用带参的构造函数
+
+    // 注意：如果通过无参构造函数创建对象时，对象后面不用跟括号，否则就成了函数声明
+    Date d3();// 声明了d3函数，该函数无参，返回一个日期类型的对象
+    return 0;
+}
