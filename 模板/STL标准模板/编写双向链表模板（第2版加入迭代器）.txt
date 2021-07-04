@@ -1,0 +1,185 @@
+//编写双向链表模板（第2版）
+#if 0
+/**************
+程序功能：编写双向链表模板（第2版）
+    利用迭代器进行尾插和头插
+时间：2021年7月4日15:41:11
+**************/
+#include<iostream>
+using namespace std;
+namespace bit
+{
+    template<class _Ty>
+    class list
+    {
+    public:
+        //类型的萃取
+        typedef size_t  size_type;
+        typedef _Ty value_type; //节点内保存的值的类型
+        typedef _Ty* pointer_type; // 值的指针
+        typedef _Ty& referenct_type; // 值的引用
+    public:
+        struct _Node; //声明节点
+        typedef _Node* _Nodeptr; // 节点指针
+        struct _Node // 定义节点结构
+        {
+            _Nodeptr _Next; // 指向后继节点的指针
+            _Nodeptr _Prev; // 指向前驱节点的指针
+            value_type _Value; // 节点的值，值的类型为_Ty
+        };
+        struct _Acc // 工具结构体，可以让我们更方便的寻找指定节点的前驱和后继
+        {
+            typedef _Nodeptr& _Nodepref; // _Nodepref是节点指针的引用
+            typedef _Ty& _Vref; //是节点值的引用
+            // 以下成员函数定义为静态，是为了让结构体名可以直接调动成员函数
+            static _Nodepref _Next(_Nodeptr _P)
+            {
+                return _P->_Next;//返回节点的后继
+            }
+            static _Nodepref _Prev(_Nodeptr _P)
+            {
+                return _P->_Prev; //返回节点的前驱
+            }
+            static _Vref _Value(_Nodeptr _P)
+            {
+                return _P->_Value; //返回节点的值
+            }
+        };
+    public: // explicit防止隐式转换
+        explicit list() :_Head(_Buynode()), _Size(0) // 构造函数
+        {}
+        explicit list(size_type _N, const _Ty& _V = _Ty()) // 直接构造一个具有_N个节点的链表，每个节点保存的值都是_V
+            :_Head(_Buynode()), _Size(0)
+        {
+            insert(begin(), _N, _V);
+        }
+    public:
+        class iterator // 定义迭代器类
+        {
+        public:
+            iterator() // 无参默认构造函数
+            {}
+            iterator(_Nodeptr _P) : _Ptr(_P) // 全缺省默认构造函数
+            {}
+        public:
+            _Ty& operator*()
+            {
+                return _Ptr->_Value;
+            }
+            iterator& operator++() //重载前++
+            {
+                _Ptr = _Ptr->_Next;
+                return *this;
+            }
+            iterator& operator--() // 重载前--
+            {
+                _Ptr = _Ptr->_Prev;
+                return *this;
+            }
+            bool operator!=(const iterator& it)
+            {
+                return _Ptr != it._Ptr;
+            }
+            bool operator==(const iterator& it)
+            {
+                return _Ptr == it._Ptr;
+            }
+            _Nodeptr _Mynode() const
+            {
+                return (_Ptr);
+            }
+        protected:
+            _Nodeptr _Ptr; // 节点指针类型
+        };
+
+    public:
+        iterator begin()
+        {
+            return iterator(_Acc::_Next(_Head)); // 将节点指针_Nodeptr类型强转为迭代器iterator类型
+        }                                  //相当于返回一个临时的_Nodeptr类对象，临时对象会调用全缺省默认构造函数进行初始化
+        iterator end()
+        {
+            return iterator(_Head);
+        }
+
+    public:
+        void push_back(const _Ty& x) // 尾插
+        {
+            insert(end(), x);
+        }
+        void push_front(const _Ty& x) // 头插
+        {
+            insert(begin(), x);
+        }
+    public:
+        iterator insert(iterator _P, const _Ty& _X = _Ty()) // 在_P位置前面插入节点，节点内保存的值为_X,_Ty()是对_X进行零初始化
+        {
+            _Nodeptr _S = _P._Mynode();
+            _Acc::_Prev(_S) = _Buynode(_S, _Acc::_Prev(_S)); // 此处一下子连接了三处，
+            _S = _Acc::_Prev(_S);//_S指向新节点
+            _Acc::_Next(_Acc::_Prev(_S)) = _S; // _S的前驱节点的屁股连在_S的头上
+            _S->_Value = _X; // 将值保存
+            //allocator.construct(&_Acc::_Value(_S), _X);
+            ++_Size;
+            return (iterator(_S)); // 
+        }
+        void insert(iterator _P, size_type _M, const _Ty& _X) //连续插入_M个保存_X值的节点
+        {
+            for (; 0 < _M; --_M)
+                insert(_P, _X);
+        }
+        void insert(iterator _P, const _Ty* _F, const _Ty* _L)// 插入一个数组
+        {
+            for (; _F != _L; ++_F)
+                insert(_P, *_F);
+        }
+    protected:
+        //购买节点函数可以保证创建头节点成功，也可以保证创建一个新节点前后连接成功。
+        _Nodeptr _Buynode(_Nodeptr _Narg = 0, _Nodeptr _Parg = 0) // _Narg是后继参数，_Parg是前驱参数
+        {
+            _Nodeptr _S = (_Nodeptr)malloc(sizeof(_Node)); // 首先申请一个节点
+
+            //_S->_Next = _Narg != 0 ? _Narg : _S;
+            _Acc::_Next(_S) = _Narg != 0 ? _Narg : _S; //_S的尾连在_Narg上，或者连在自己的头上
+            //_S->_Prev = _Parg != 0 ? _Parg : _S;
+            _Acc::_Prev(_S) = _Parg != 0 ? _Parg : _S; // _S的头连在_Parg上，或者连在自己的尾上
+
+            return _S;
+        }
+    private:
+        _Nodeptr  _Head; // 指向头节点的指针
+        size_type _Size; // 数据节点个数
+    };
+};
+using namespace bit;
+int main()
+{
+    int ar[] = { 12,23,34,45,56,67,78,89 };
+    int n = sizeof(ar) / sizeof(ar[0]);
+
+    list<int> mylist;
+    mylist.push_back(1);
+    mylist.push_back(2);
+    mylist.push_back(3);
+    mylist.push_back(4);
+    mylist.push_front(5);
+
+    mylist.insert(mylist.end(), 3,100); // 在最后一个节点处插入3个值为100的节点
+    mylist.insert(mylist.begin(), ar, ar + n);//在第一个节点出插入一个数组
+    list<int>::iterator it = mylist.begin(); // 实例化一个迭代器类型对象，并用begin初始化，it默认处于第一个结点的位置
+    while (it != mylist.end())
+    {
+        cout << *it << "-->";
+        ++it;
+    }
+    cout << endl << endl;
+    list<int> mylist2(10, 2); // 构造一个具有10个节点的链表，节点里面保存的值为2
+    it = mylist2.begin();
+    while (it != mylist2.end())
+    {
+        cout << *it << "-->";
+        ++it;
+    }
+    return 0;
+}
+#endif
