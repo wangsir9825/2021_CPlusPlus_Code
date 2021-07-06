@@ -1,0 +1,22 @@
+#include<iostream>
+#include<list>
+using namespace std;
+
+int main()
+{
+    int ar[10] = { 1,2,3,4,5,6,7,8,9,10 };
+    list<int> list1; //创建一个空链表，调用无参默认构造函数
+    list<int> list2(10); //  创建具有10个节点的链表，由于没指定值，所以每个节点被零初始化
+    for (auto& e : list2)
+        cout << e << " ";
+    list<int> list3(10, 5); //  创建具有10个节点的链表，每个节点保存的值为5
+    list<int> list4(ar, ar + 10); // 使用数组区间初始化链表
+    list<int> list5(list4); // 使用链表初始化链表，调用拷贝构造函数
+    list<int> list6(list5.begin(), list5.end()); // 使用链表区间初始化区间
+     
+    for (auto& e : list6)
+        cout << e << " ";
+
+
+    return 0;
+}
