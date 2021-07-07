@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+class Test
+{
+public:
+    Test(int data = 0) // 全缺省默认构造函数
+    {
+        m_data = data;
+    }
+    Test* operator&() // 普通对象的取地址运算符重载
+    {
+        return this; // 返回当前对象的地址
+    }
+    void showdata()
+    {
+        cout << m_data << endl;
+    }
+private:
+    int m_data;
+};
+int main()
+{
+    Test t1(100);
+    Test* pt = &t1;
+    pt->showdata();
+    return 0;
+}
