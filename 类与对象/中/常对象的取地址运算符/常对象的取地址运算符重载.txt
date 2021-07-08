@@ -1,0 +1,33 @@
+#include <iostream>
+using namespace std;
+class Test
+{
+public:
+    Test(int data = 0) // 全缺省默认构造函数
+    {
+        m_data = data;
+    }
+    Test* operator&() // 普通对象的取地址运算符重载
+    {
+        cout << "普通对象的&重载函数" << endl;
+        return this; // 返回当前对象的地址
+    }
+    const Test* operator&()const // 常对象的取地址运算符重载
+    {
+        cout << "常对象的&重载函数" << endl;
+        return this; // 返回当前对象的地址
+    }
+    void showdata()const
+    {
+        cout << m_data << endl;
+    }
+private:
+    int m_data;
+};
+int main()
+{
+    const Test t1(80);
+    const Test* pt = &t1; // 调用常对象的&重载函数
+    pt->showdata(); // 常指针只能调动常方法
+    return 0;
+}
