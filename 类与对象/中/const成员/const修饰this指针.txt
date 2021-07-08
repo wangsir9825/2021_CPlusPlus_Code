@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+
+class Test
+{
+public:
+    Test(int data = 0) // 全缺省默认构造函数
+    {
+        m_data = data;
+    }
+    void showdata()const
+    {
+        cout << this->m_data << endl; // 此处的this可以省略
+    }
+private:
+    int m_data;
+};
+int main()
+{
+    Test t1(80);
+    t1.showdata();
+    return 0;
+}
