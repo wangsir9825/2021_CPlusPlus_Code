@@ -1,0 +1,24 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+int main()
+{
+    vector<int> iv;
+    iv.push_back(1);
+    iv.push_back(2);
+    iv.push_back(3);
+    iv.push_back(4);
+    iv.push_back(5);
+    iv.push_back(6);
+    iv.push_back(7);
+    cout << "size = " << iv.size() << endl;
+    cout << "capacity = " << iv.capacity() << endl;
+
+    iv.resize(3);  // 元素个数调整为3，但空间不会变小
+    //iv.reserve(10);  //空间调整为10，空间会增加，空间无法调小
+    cout << "size = " << iv.size() << endl;
+    cout << "capacity = " << iv.capacity() << endl;
+
+    return 0;
+}
