@@ -1,0 +1,30 @@
+#include<iostream>
+#include<list>
+using namespace std;
+void showlist(const list<int>& list1)
+{
+    for (auto& e : list1)
+        cout << e << " ";
+    cout << endl;
+}
+int main()
+{
+    int ar[] = { 1,2,3,4,5,6,7,8,9,10 };
+    int n = sizeof(ar) / sizeof(ar[0]);
+    list<int> list1(ar, ar + n);
+    auto it = list1.begin();
+    while (it != list1.end()) // 将链表的所有节点删除
+    {
+        it = list1.erase(it); //erase返回下一个节点的位置
+    }
+    // 下面的程序会崩溃
+    //auto it = list1.begin();
+    //while (it != list1.end())
+    //{
+    //    list1.erase(it);
+    //    ++it; // 由于it指向的节点被释放，所以it无法在继续++，即迭代器失效了
+    //}
+    showlist(list1);
+
+    return 0;
+}
