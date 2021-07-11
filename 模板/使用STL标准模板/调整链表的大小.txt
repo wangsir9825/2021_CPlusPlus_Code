@@ -1,0 +1,33 @@
+#include<iostream>
+#include<list>
+using namespace std;
+void showlist(const list<int>& list1)
+{
+    for (auto& e : list1)
+        cout << e << " ";
+    cout << endl;
+}
+
+int main()
+{
+    int ar[10] = { 1,2,3,4,5,6,7,8,9,10 };
+    int br[10] = { 12,23,34,45,56,67,78,89,90,100 };
+    list<int> list1(ar, ar + 10); // 使用数组区间初始化链表
+    list<int> list2(br, br + 10);
+
+    cout << "size = " << list1.size() << endl; // 计算链表的大小
+    showlist(list1);
+
+    list1.resize(15); // 将链表的大小调为15，多出的节点默认值为0
+    cout << "size = " << list1.size() << endl; // 计算链表的大小
+    showlist(list1);
+
+    list1.resize(20, 13); // 将链表大小调成20，多出的节点的值初始为13
+    cout << "size = " << list1.size() << endl;
+    showlist(list1);
+
+    list1.resize(5, 13); // 将链表大小调成5，这时候即使给了初始值，剩余节点的值也不会变，只是将第5个之后的节点删除而已
+    cout << "size = " << list1.size() << endl;
+    showlist(list1);
+    return 0;
+}
