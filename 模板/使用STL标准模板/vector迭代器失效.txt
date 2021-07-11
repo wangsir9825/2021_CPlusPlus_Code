@@ -1,0 +1,18 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+int main()
+{
+    int ar[] = { 1,2,3,4,5,6,7,8,9,10 };
+    int n = sizeof(ar) / sizeof(ar[0]);
+    vector<int> iv(ar, ar + n);
+
+    auto it = find(iv.begin(), iv.end(), 5);
+    cout << "*it = " << *it << endl;
+
+    iv.push_back(20);
+    cout << "*it = " << *it << endl; // A试图访问失效的迭代器，所以此处程序会崩溃
+
+    return 0;
+}
