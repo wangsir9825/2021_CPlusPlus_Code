@@ -1,0 +1,15 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+int main()
+{
+    vector<int> iv;
+    iv.reserve(100); // 为iv预分配100个空间
+    for (int i = 1; i <= 100; ++i)
+    {
+        iv.push_back(i);
+        cout << "capacity = " << iv.capacity() << endl;
+    }
+    return 0;
+}
