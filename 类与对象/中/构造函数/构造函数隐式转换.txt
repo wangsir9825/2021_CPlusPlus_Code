@@ -1,0 +1,17 @@
+#include <iostream>
+using namespace std;
+class Test
+{
+public:
+    Test(int data)
+        : _data(data)
+    {}
+private:
+    int _data;
+};
+int main()
+{
+    Test t1(1000);
+    t1 = 2000; // 用一个整形变量给日期类型对象赋值
+    return 0;
+}
