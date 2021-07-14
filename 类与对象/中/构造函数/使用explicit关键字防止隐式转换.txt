@@ -1,0 +1,18 @@
+#include <iostream>
+using namespace std;
+class Test
+{
+public:
+    explicit Test(int data)
+        : _data(data)
+    {}
+
+private:
+    int _data;
+};
+int main()
+{
+    Test t1(1000);
+    // t1 = 2000; // 这一句无法执行，无法用整型变量给日期类型对象直接赋值
+    return 0;
+}
