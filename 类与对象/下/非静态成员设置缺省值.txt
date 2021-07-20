@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+class A {
+public:
+	void Print()
+	{
+		cout << a << endl;
+		cout << p << endl; // 打印P指向的空间地址
+	}
+private:
+	// 非静态成员变量，可以在成员声明时给缺省值。
+	int a = 10;
+	int* p = (int*)malloc(4);
+	static int n; // 静态成员变量只能在类外初始化
+};
+int A::n = 10; // 给静态成员变量进行初始化
+int main()
+{
+	A a;
+	a.Print();
+	return 0;
+}
