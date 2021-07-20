@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+class A {
+public:
+A() // 无参构造函数
+{
+_scount = 100; // 在构造函数中进行赋值
+}
+static int GetACount() // 静态成员函数
+{
+return _scount;
+}
+private:
+	static int _scount;
+};
+
+int A::_scount = 0; // 定义静态变量_scount，并初始化为0
+
+int main()
+{
+	cout << A::GetACount() << endl;	// 第一种访问格式（类名::静态成员）
+	A a1;
+	cout << a1.GetACount() << endl; // 第二种访问格式（对象.静态成员）
+
+	return 0;
+}
