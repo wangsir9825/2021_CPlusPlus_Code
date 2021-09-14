@@ -1,0 +1,44 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+int main()
+{
+	string s("abcxyz"); // 用字符串数组构造string类对象
+	cout << endl << "---------0 cout直接输出字符串---------" << endl;
+	cout << s << endl; // 直接输出字符串
+
+	cout << "---------1 使用下标引用作用符---------" << endl;
+	for (unsigned int i = 0; i < s.size(); ++i) // 第一种，使用下标引用作用符
+		cout << s[i];
+
+	cout << endl << "---------2 利用迭代器输出字符串-------" << endl;
+	string::iterator it = s.begin(); // 第二种：利用迭代器输出字符串
+	while (it != s.end())
+	{
+		cout << *it;
+		++it;
+	}
+
+	cout << endl << "---------3 基于范围for循环输出字符串--" << endl;
+	for (auto& e : s) // 第三种：基于范围for循环输出字符串
+		cout << e;
+
+	cout << endl << "---------4 利用反向迭代器输出字符串---" << endl;
+	string::reverse_iterator rit = s.rbegin(); // 第四种：利用反向迭代器输出字符串
+	while (rit != s.rend())
+	{
+		cout << *rit;
+		++rit;
+	}
+
+	cout << endl << "---------利用常迭代器输出常字符串-----" << endl;
+	const string s1 = "asdfghjkl";
+	string::const_iterator cit = s1.cbegin(); // 利用常迭代器输出常字符串
+	while (cit != s1.cend())
+	{
+		cout << *cit;
+		++cit;
+	}
+	return 0;
+}
