@@ -1,0 +1,16 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	string s("abc");
+	cout << "-----------初始状态-----------" << endl;
+	cout << "s = " << s << endl;
+	cout << "--------push_back('x')--------" << endl;
+	s.push_back('x'); // 字符串类只能尾插字符，不能头插
+	cout << "s = " << s << endl;
+	cout << "--------append(\"fgh\")---------" << endl;
+	s.append("fgh"); // 字符串类不能插入字符串，可以追加字符串
+	cout << "s = " << s << endl;
+	return 0;
+}
