@@ -1,0 +1,26 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+int main()
+{
+	string s; // 第一种，空字符串
+	cout << "s = " << s << endl;
+
+	const char* pstr = "abc"; // 第二种：用字符串指针构造string类对象（1）
+	string s1(pstr);
+	cout << "s1 = " << s1 << endl;
+
+	string s2("xyz"); // 用常量字符串构造string类对象（2）
+	cout << "s2 = " << s2 << endl;
+
+	string s3(10, 'a'); // 第三种：使用10个字符a初始化string类对象
+	cout << "s3 = " << s3 << endl;
+
+	string s4(s1); // 第四种：拷贝构造
+	cout << "s4 = " << s4 << endl;
+
+	string s5 = s2; // 第五种：利用string对象s2为s5赋值
+	cout << "s5 = " << s5 << endl;
+	return 0;
+}
