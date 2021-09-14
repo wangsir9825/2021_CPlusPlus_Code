@@ -1,0 +1,67 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	cout << "-----------------初始状态-----------------" << endl;
+	string s3; // 第一种，空字符串
+	cout << "s3.size = " << s3.size() << "\t" ; // 求字符串的有效大小
+	cout << "s3.length = " << s3.length() << "\t"; // 求字符串的长度
+	cout << "s3.capacity = " << s3.capacity() << endl;// 求字符串类的容量
+
+	cout << endl << "-------------string类对象赋值--------------" << endl;
+	s3 = "Hello \0 world!"; // 使用常量字符串为string对象赋值
+	cout << "s3 = " << s3 << endl; // Hello \0
+	cout << "s3.size = " << s3.size() << "\t"; // 求字符串的有效大小
+	cout << "s3.length = " << s3.length() << "\t"; // 求字符串的长度
+	cout << "s3.capacity = " << s3.capacity() << endl;// 求字符串类的容量
+
+	cout << endl << "--------------resize(10, '!')-------------" << endl;
+	s3.resize(10, '!');// 将s中有效字符个数增加到10个，新增加的空间用'!'进行填充
+	cout << "s3 = " << s3 << endl; // Hello !!!!
+	cout << "s3.size = " << s3.size() << "\t";
+	cout << "s3.length = " << s3.length() << "\t";
+	cout << "s3.capacity = " << s3.capacity() << endl;
+
+	cout << endl << "----------------resize(20)----------------" << endl;
+	s3.resize(20);// 将s中有效字符个数增加到20个，新增加的空间用'\0'进行填充
+	cout << "s3 = " << s3 << endl;// Hello !!!!\0\0\0\0\0\0\0\0\0\0
+	cout << "s3.size = " << s3.size() << "\t";
+	cout << "s3.length = " << s3.length() << "\t";
+	cout << "s3.capacity = " << s3.capacity() << endl;
+
+	cout << endl << "---------------resize(4,'a')--------------" << endl;
+	s3.resize(4,'a');// 将s中有效字符个数增加到4个，新增加的空间用'a'进行填充
+	cout << "s3 = " << s3 << endl; // Hell
+	cout << "s3.size = " << s3.size() << "\t";
+	cout << "s3.length = " << s3.length() << "\t";
+	cout << "s3.capacity = " << s3.capacity() << endl;
+
+	cout << endl << "---------------reserve(32)--------------" << endl;
+	s3.reserve(32); // 预分配32个空间
+	cout << "s3 = " << s3 << endl;
+	cout << "s3.size = " << s3.size() << "\t";
+	cout << "s3.length = " << s3.length() << "\t";
+	cout << "s3.capacity = " << s3.capacity() << endl;
+
+	cout << endl << "---------------reserve(100)--------------" << endl;
+	s3.reserve(100); // 预分配100个空间
+	cout << "s3 = " << s3 << endl;
+	cout << "s3.size = " << s3.size() << "\t";
+	cout << "s3.length = " << s3.length() << "\t";
+	cout << "s3.capacity = " << s3.capacity() << endl;
+
+	cout << endl << "-----------------clear()-----------------" << endl;
+	s3.clear();
+	cout << "s3 = " << s3 << endl;
+	cout << "s3.size = " << s3.size() << "\t";
+	cout << "s3.length = " << s3.length() << "\t";
+	cout << "s3.capacity = " << s3.capacity() << endl;
+
+	cout << endl << "-----------------empty()-----------------" << endl;
+	if (s3.empty())
+		cout << "true" << endl;
+	else
+		cout << "false" << endl;
+	return 0;
+}
