@@ -5,6 +5,7 @@ using namespace std;
 int main()
 {
 	string s; // 第一种，空字符串
+	s = "Hello world!"; // 利用字符串直接进行赋值
 	cout << "s = " << s << endl;
 
 	const char* pstr = "abc"; // 第二种：用字符串指针构造string类对象（1）
