@@ -1,0 +1,11 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	string file("string.cpp");
+	size_t pos = file.rfind('.'); // 首先查找点位置
+	string suffix(file.substr(pos, file.size() - pos)); // 截取字符串
+	cout << suffix << endl;
+	return 0;
+}
