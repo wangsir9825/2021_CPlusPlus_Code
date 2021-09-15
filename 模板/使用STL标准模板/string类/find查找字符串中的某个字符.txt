@@ -1,0 +1,14 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	string s("abcdxz");
+	//int pos = s.find('x'); // 默认从第0个位置查找
+	int pos = s.find('x', 4); // 从第四个位置查找字符x
+	if (pos == string::npos)
+		cout << "没有找到" << endl;
+	else
+		cout << "pos = " << pos << endl;
+	return 0;
+}
