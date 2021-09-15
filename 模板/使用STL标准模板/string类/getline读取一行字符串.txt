@@ -1,0 +1,15 @@
+#include<iostream>
+#include <string> // getline
+using namespace std;
+
+int main()
+{
+	string str1;
+	string str2;
+	//cin>>str;  // 读取的字符串不能有空格，否则读取的数据不完整
+	getline(cin, str1); // 从输入流中获取一行字符串
+	getline(cin, str2, ' '); // 从输入流中读取字符串，以空格为结束位
+	cout << "str1 = " << str1 << endl;
+	cout << "str2 = " << str2 << endl;
+	return 0;
+}
