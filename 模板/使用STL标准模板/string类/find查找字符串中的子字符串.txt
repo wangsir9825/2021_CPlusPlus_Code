@@ -1,0 +1,15 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	string s("abcxyz"); // 源字符串
+
+	int pos = s.find("cxy"); // 默认从0位置查找
+	//int pos = s.find("cxy", 3); // 指定从第3个位置查找
+	if (pos == string::npos)
+		cout << "没有找到" << endl;
+	else
+		cout << "pos = " << pos << endl;
+	return 0;
+}
