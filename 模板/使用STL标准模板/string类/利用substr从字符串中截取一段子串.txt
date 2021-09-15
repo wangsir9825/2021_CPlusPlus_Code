@@ -1,0 +1,12 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	string str("abcvip");
+	string ret1 = str.substr(3); // 从字符串str的第3个位置开始截取字符串
+	string ret2 = str.substr(2, 3); // 从字符串str的第2个位置开始截取3个字符
+	cout << "ret1 = " << ret1 << endl;
+	cout << "ret2 = " << ret2 << endl;
+	return 0;
+}
