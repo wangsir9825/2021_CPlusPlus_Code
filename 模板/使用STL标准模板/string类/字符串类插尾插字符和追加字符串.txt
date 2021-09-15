@@ -12,5 +12,8 @@ int main()
 	cout << "--------append(\"fgh\")---------" << endl;
 	s.append("fgh"); // 字符串类不能插入字符串，可以追加字符串
 	cout << "s = " << s << endl;
+	cout << "-----------+=\"jkl\"------------" << endl;
+	s += "jkl"; // 字符串类不能插入字符串，可以追加字符串
+	cout << "s = " << s << endl;
 	return 0;
 }
