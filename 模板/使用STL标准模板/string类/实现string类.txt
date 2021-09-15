@@ -1,0 +1,336 @@
+/**************
+程序功能：实现string类
+时间：2021年8月12日21:39:24
+**************/
+#define _CRT_SECURE_NO_WARNINGS 0
+#include<iostream>
+#include<assert.h>
+using namespace std;
+
+//字符串的模拟实现
+namespace bit
+{
+	class string
+	{
+		friend ostream& operator<<(ostream& out, const string& s); // 输出运算流
+	public:
+		static size_t npos;
+		typedef char* iterator;
+	public:
+		string(const char* str = "") //  全缺省默认构造函数（默认构造函数只能有一个）
+		{
+			if (nullptr == str) // 如果参数为空指针，则将其赋值为空字符串
+				str = "";
+			_size = strlen(str); // 计算字符串长度
+			_capacity = _size; // 计算字符串容量
+			_str = new char[_capacity + 1]; // 多出来的1是'/0',也即是说真实容量永远比_capacity大1，就是为了给'\0'留一个位置
+			strcpy(_str, str);
+		}
+		static void Swap(string& s1, string& s2) // 注意参数为引用
+		{
+			swap(s1._str, s2._str); // 库函数swap的参数也是引用
+			swap(s1._size, s2._size);
+			swap(s1._capacity, s2._capacity);
+		}
+		string(const string& s) // 拷贝构造函数
+			:_str(nullptr), _size(0), _capacity(0)
+		{
+			string tmp(s._str); // 调用全缺省默认构造函数创建临时对象
+			Swap(*this, tmp); // 将临时对象与*this交换值。临时对象会自动释放空间，无需我们操心
+		}
+		string& operator=(const string& s) // 赋值运算符函数
+		{
+			if (this != &s)
+			{
+				string tmp(s);
+				Swap(*this, tmp);
+			}
+			return *this;
+		}
+		~string()
+		{
+			if (_str) {
+				delete[]_str; // 销毁空间
+				_str = nullptr; // 预防野指针
+			}
+		}
+
+	public:
+		size_t size()const // 求字符串大小
+		{
+			return _size;
+		}
+		size_t capacity()const // 求容量
+		{
+			return _capacity;
+		}
+		bool empty()const // 判断字符串是否为空
+		{
+			return _size == 0;
+		}
+		void clear()
+		{
+			_size = 0;
+			_str[_size] = '\0';
+		}
+		void resize(int new_sz, char ch = '\0')
+		{
+			if (new_sz > _capacity)
+			{
+				reserve(new_sz);
+
+				for (int i = _size; i < new_sz; ++i)
+					_str[i] = ch;
+			}
+
+			_size = new_sz;
+			_str[_size] = '\0';
+		}
+		void reserve(int n) // 扩容成n个字节的空间，如果n小于旧空间，则原空间不变
+		{
+			if (n > _capacity) // 如果扩容的空间大于旧空间
+			{
+				char* new_str = new char[n + 1]; // 申请新空间
+				memset(new_str, 0, n + 1); // 
+				if (_str != nullptr)
+					memcpy(new_str, _str, _capacity + 1); // +1是为了将'\0'拷贝过去
+				_capacity = n;
+				delete[]_str; // 释放旧空间
+				_str = new_str; // _str指向新空间
+			}
+		}
+
+	public:
+		void push_back(char c) // 尾插字符函数
+		{
+			if (_size + 1 > _capacity) // 首先判断是否具有空间，如果空间不够
+			{
+				int n = _capacity == 0 ? 1 : _capacity * 2; // 以2倍的速度扩容
+				reserve(n); // 调用扩容成员函数
+			}
+			_str[_size++] = c; // 将字符c插入到空间中
+			_str[_size] = '\0'; // 添加'\0'防止输出乱码
+		}
+		void append(const char* str)
+		{
+			size_t sz = strlen(str);
+			if (_size + sz > _capacity)
+			{
+				reserve(_size + sz);
+			}
+
+			strcat(_str, str);
+			_size += sz;
+		}
+
+		string& operator+= (char c) // 可以加单个字符
+		{
+			push_back(c);
+			return *this;
+		}
+		string& operator+=(const char* str) // 加字符串
+		{
+			append(str);
+			return *this;
+		}
+		string& operator+=(const string& s) // 加string类对象
+		{
+			append(s._str);
+			return *this;
+		}
+		const char* c_str()const // 转化为c字符串
+		{
+			return _str;
+		}
+
+		size_t find(char c, size_t pos = 0) const // 从前往后查找字符
+		{
+			for (int i = pos; i < _size; ++i)
+			{
+				if (_str[i] == c)
+					return i;
+			}
+			return npos;
+		}
+
+		//A B C
+		size_t rfind(char c, size_t pos = npos) const // 从后往前查找字符
+		{
+			int new_pos = (pos == npos ? _size - 1 : pos);
+			for (int i = new_pos; i >= 0; --i)
+			{
+				if (_str[i] == c)
+					return i;
+			}
+			return npos;
+		}
+
+		// 返回子串s在string中第一次出现的位置
+		size_t find(const char* s, size_t pos = 0) const
+		{
+			int i = pos;  //_str
+			int j = 0;    //s
+			while (i < _size && j < strlen(s))
+			{
+				if (_str[i] == s[j])
+				{
+					++i;
+					++j;
+				}
+				else
+				{
+					j = 0;
+					i = i - j + 1;
+				}
+			}
+			if (j > strlen(s))
+				return i - strlen(s);
+			return npos;
+
+		}
+
+	public: // 迭代器和下标引用操作符
+		iterator begin()
+		{
+			return _str;
+		}
+		iterator end()
+		{
+			return _str + _size;
+		}
+		char& operator[](int i)
+		{
+			assert(i >= 0 && i < _size);
+			return _str[i];
+		}
+		const char& operator[](size_t index)const
+		{
+			assert(index >= 0 && index < _size);
+			return _str[index];
+		}
+
+	public:
+
+		bool operator<(const string& s)
+		{
+			return (strcmp(_str, s._str) < 0);
+		}
+		bool operator<=(const string& s)
+		{
+			return (strcmp(_str, s._str) <= 0);
+		}
+		bool operator>(const string& s)
+		{
+			return !(*this <= s);
+		}
+		bool operator>=(const string& s) 
+		{
+			return !(*this < s);
+		}
+		bool operator==(const string& s)
+		{
+			return (strcmp(_str, s._str) == 0);
+		}
+		bool operator!=(const string& s)
+		{
+			return !(*this == s);
+		}
+	public:
+		// 在pos位置上插入字符c/字符串str，并返回该字符的位置
+		string& insert(size_t pos, char c)
+		{
+			if (_size + 1 > _capacity)
+				reserve(_capacity * 2);
+
+			for (int i = _size; i > pos; --i)
+				_str[i] = _str[i - 1];
+
+			_str[pos] = c;
+			_size++;
+			return *this;
+		}
+		string& insert(size_t pos, const char* str)
+		{
+			int len = strlen(str);
+			if (_size + len > _capacity)
+				reserve(_size + len);
+
+			for (int i = _size; i >= pos; --i)
+				_str[i + len] = _str[i];
+
+			int j = 0;
+			for (int i = pos; j < len; ++i, ++j)
+			{
+				_str[i] = str[j];
+			}
+			_size += len;
+			return *this;
+
+		}
+		// 删除pos位置上的元素，并返回该元素的下一个位置
+		//abcdefghijk
+		//   3
+		string& erase(size_t pos, size_t len)
+		{
+			char* tmp = new char[_size - len + 1];
+			memset(tmp, 0, _size - len + 1);
+			strncpy(tmp, _str, pos);
+			strncat(tmp, _str + pos + len, _size - pos - len + 1);
+
+			strcpy(_str, tmp);
+			_size -= len;
+			delete[]tmp;
+			return *this;
+		}
+
+	private:
+		char* _str;
+		size_t _size;
+		size_t _capacity;
+	};
+
+	size_t bit::string::npos = (size_t)(-1);
+
+	ostream& operator<<(ostream& out, const string& s) // 输出运算符重载
+	{
+		out << s._str;
+		return out;
+	}
+
+	bool operator!=(const string& s1, const string& s2)
+	{
+		return strcmp(s1.c_str(), s2.c_str());
+	}
+};
+int main()
+{
+	bit::string s; // 测试无参默认构造函数
+	bit::string s1("Hello"); // 测试用常字符串给string类初始化
+
+	cout << "s1 = " << s1 << endl; // 测试输出运算符重载函数
+	cout << "s1 size = " << s1.size() << endl; // 测试计算字符串长度函数
+	cout << "s1 capacity = " << s1.capacity() << endl; // 测试计算字符串容量函数
+	s1.reserve(100); // 测试计算容量函数
+	cout << "s1 = " << s1 << endl;
+	cout << "s1 size = " << s1.size() << endl;
+	cout << "s1 capacity = " << s1.capacity() << endl;
+
+	s1.push_back('C'); // 测试尾插字符函数
+	cout << "s1 = " << s1 << endl;
+	cout << "s1 size = " << s1.size() << endl;
+	cout << "s1 capacity = " << s1.capacity() << endl;
+
+	int pos = s1.find('l'); // 测试尾插字符函数
+	cout << pos << s1[pos] << endl;
+
+	pos = s1.rfind('o', 100);
+	if (pos == bit::string::npos)
+		cout << "没有找到" << endl;
+	else
+		cout << "pos = " << pos << endl;
+	return 0;
+
+
+
+	return 0;
+}
