@@ -1,0 +1,45 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+int main()
+{
+	vector<int> arr1; // 1 构造一个空vector
+	cout << "----------------vector<int> arr1;----------------" << endl;
+	vector<int>::iterator it = arr1.begin(); // 正向迭代
+	for(; it < arr1.end(); ++it)
+		cout << *it << " ";
+	cout << endl;
+
+	vector<int> arr2(4, 100); // 2 数组有4个元素，所有元素的值都是100
+	cout << "------------vector<int> arr2(4, 100);------------" << endl;
+	it = arr2.begin();
+	for (; it < arr2.end(); ++it)
+		cout << *it << " ";
+	cout << endl << endl;
+
+	int ar[] = { 1,2,3,4,5,6,7,8,9,10 };
+	int n = sizeof(ar) / sizeof(ar[0]);
+	vector<int> arr3(ar, ar + n); // 3 利用数组构造vector
+	cout << "----------vector<int> arr3(ar, ar + n);----------" << endl;
+	it = arr3.begin();
+	for (; it < arr3.end(); ++it)
+		cout << *it << " ";
+	cout << endl << endl;
+
+	vector<int> arr4(arr3.begin(), arr3.end()); // 4 利用迭代器初始化vector
+	cout << "---vector<int> arr4(arr3.begin(), arr3.end());---" << endl;
+	it = arr3.begin();
+	for (; it < arr3.end(); ++it)
+		cout << *it << " ";
+	cout << endl << endl;
+
+	vector<int> arr5(arr3); // 拷贝构造
+	cout << "-------------vector<int> arr5(arr3);-------------" << endl;
+	it = arr3.begin();
+	for (; it < arr3.end(); ++it)
+		cout << *it << " ";
+	cout << endl;
+
+	return 0;
+}
