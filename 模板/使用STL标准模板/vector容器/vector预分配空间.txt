@@ -1,0 +1,30 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+int main()
+{
+	vector<int> iv1;
+	vector<int> iv2;
+	size_t sz = iv1.capacity();
+	cout << "origin iv1.capacity : " << sz << endl;
+	for (int i = 1; i <= 100; ++i)
+	{
+		iv1.push_back(i);
+		if (sz != iv1.capacity()) {
+			sz = iv1.capacity();
+			cout << "iv1.capacity changed: " << sz << endl;
+		}
+	}
+	iv2.reserve(100); // 为iv预分配100个空间
+	sz = iv2.capacity();
+	for (int i = 1; i <= 100; ++i)
+	{
+		iv2.push_back(i);
+		if (sz != iv2.capacity()) {
+			sz = iv2.capacity();
+			cout << "iv2.capacity changed: " << sz << endl;
+		}
+	}
+	return 0;
+}
