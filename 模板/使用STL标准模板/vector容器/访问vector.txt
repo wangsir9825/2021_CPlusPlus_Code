@@ -1,0 +1,52 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+void PrintVector(const vector<int>& v)
+{
+	vector<int>::const_iterator it = v.begin();
+	while (it != v.end())
+	{
+		cout << *it << " ";
+		++it;
+	}
+	cout << endl;
+}
+int main()
+{
+	int ar[] = { 1,2,3,4,5,6,7,8,9,10 };
+	int n = sizeof(ar) / sizeof(ar[0]);
+	vector<int> iv1(ar, ar + n); // 利用数组构造vector
+	cout << "-----------基于下标的访问方式----------" << endl;
+	for (int i = 0; i < iv1.size(); ++i) // 基于下标的访问方式
+		cout << iv1[i] << " "; // 此处说明vector对[]有重载
+	cout << endl << endl;
+
+	cout << "------------基于范围的访问------------" << endl;
+		for (auto& e : iv1) // 基于范围的访问
+		cout << e << " ";
+	cout << endl << endl;
+
+	cout << "----------基于正向迭代器的访问---------" << endl;
+	vector<int>::iterator it = iv1.begin(); // 基于正向迭代器的访问
+	while (it != iv1.end())
+	{
+		cout << *it << " ";
+		++it;
+	}
+	cout << endl << endl;
+
+	cout << "----------基于反向迭代器的访问---------" << endl;
+	vector<int>::reverse_iterator rit = iv1.rbegin(); // 基于反向迭代器的访问
+	while (rit != iv1.rend())
+	{
+		cout << *rit << " ";
+		++rit;
+	}
+	cout << endl << endl;
+
+	cout << "-----------基于常迭代器的访问----------" << endl;
+	PrintVector(iv1); // 基于常迭代器的访问
+
+	return 0;
+}
