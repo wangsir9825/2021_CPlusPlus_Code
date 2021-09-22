@@ -103,7 +103,7 @@ protected:
 	}
 	BSTNode<_Ty>* Search(BSTNode<_Ty>* t, const _Ty& key)const // 从二叉搜索树中查找某个值，按值搜索
 	{
-		if (t == nullptr)
+		if (t == nullptr) // 如果查找的是空树或者目标节点不存在
 			return t;
 		if (key < t->data) // 如果搜索值小于根节点，则在左子树中查找
 			return Search(t->leftChild, key);
@@ -136,7 +136,7 @@ protected:
 			BSTNode<_Ty>* p = nullptr;
 
 			//找到了， 删除
-			if (t->leftChild == nullptr && t->rightChild != nullptr)// 如果当前节点有右树，有左树
+			if (t->leftChild == nullptr && t->rightChild != nullptr)// 如果当前节点有右树和左树
 			{
 				p = t->leftChild; // 保存根节点左树的地址
 				while (p->rightChild != nullptr) // 寻找根节点左子树的最大节点
@@ -156,103 +156,6 @@ protected:
 			return true;
 		}
 	}
-
-
-	//bool Remove(BSTNode<_Ty>*& t, const _Ty& key)
-	//{
-	//	if (t == nullptr)
-	//		return false;
-	//	if (key < t->data) // 小于根节点则应该从左子树中查找删除
-	//		return Remove(t->leftChild, key);
-	//	else if (key > t->data) // 大于根节点则应该从右子树中查找删除
-	//		return Remove(t->rightChild, key);
-	//	else
-	//	{
-	//		BSTNode<_Ty>* p = nullptr;
-	//		//找到了， 删除
-	//		if (t->leftChild == nullptr && t->rightChild == nullptr) // 如果当前节点无子树
-	//		{
-	//			delete t;
-	//			t = nullptr;
-	//		}
-	//		else if (t->leftChild != nullptr && t->rightChild == nullptr) // 如果当前节点有左树，无右树
-	//		{
-	//			p = t;
-	//			t = t->leftChild; // 这里起到连接的作用，比较难想，请多思考几遍
-	//			delete p;
-	//		}
-	//		else if (t->leftChild == nullptr && t->rightChild != nullptr)// 如果当前节点有右树，无左树
-	//		{
-	//			p = t;
-	//			t = t->rightChild;
-	//			delete p;
-	//		}
-	//		else
-	//		{
-	//			p = t->leftChild; // 保存根节点左树的地址
-	//			while (p->rightChild != nullptr) // 寻找根节点左子树的最大节点
-	//				p = p->rightChild;
-	//			t->data = p->data; // 将左树最大节点的值赋值给根节点
-	//			Remove(t->leftChild, p->data); // 删除根节点左树的最大值
-	//		}
-	//		return true;
-	//	}
-	//}
-
-	//bool Remove(BSTNode<_Ty>*& t, const _Ty& key) // 删除某个值的节点
-	//{
-	//	if (t == nullptr)
-	//		return false;
-	//	BSTNode<_Ty>* p = t, * pr = nullptr;
-	//	while (p != nullptr)
-	//	{
-	//		if (key == p->data)
-	//			break;
-	//		pr = p;
-	//		if (key < p->data)
-	//			p = p->leftChild;
-	//		else
-	//			p = p->rightChild;
-	//	}
-
-	//	if (p->leftChild != nullptr && p->rightChild != nullptr)
-	//	{
-	//		BSTNode<_Ty>* q = p->leftChild;
-	//		while (q->rightChild != nullptr)
-	//		{
-	//			pr = q;
-	//			q = q->rightChild;
-	//		}
-	//		p->data = q->data;
-	//		p = q;
-	//	}
-
-	//	if (pr == nullptr)
-	//	{
-	//		if (p->leftChild != nullptr)
-	//			t = p->leftChild;
-	//		else
-	//			t = p->rightChild;
-	//	}
-	//	else
-	//	{
-	//		if (pr->leftChild == p)
-	//		{
-	//			if (p->leftChild != nullptr)
-	//				pr->leftChild = p->leftChild;
-	//			else
-	//				pr->leftChild = p->rightChild;
-	//		}
-	//		else
-	//		{
-	//			if (p->leftChild != nullptr)
-	//				pr->rightChild = p->leftChild;
-	//			else
-	//				pr->rightChild = p->rightChild;
-	//		}
-	//	}
-	//	delete p;
-	//}
 private:
 	BSTNode<_Ty>* root;
 };
@@ -263,9 +166,8 @@ int main()
 	//for (int i = 0; i < iv.size(); ++i)
 	//	bst.Insert(iv[i]);
 
-	vector<int> iv{50,30,40,10,70,80,2,60,90 };
+	vector<int> iv{ 50,30,40,10,70,80,2,60,90 };
 
-	//vector<int> iv{ 50,30,40 };
 	BSTree<int> bst(iv);
 
 	BSTNode<int>* pos = bst.Min(); // 求最小值
