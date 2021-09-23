@@ -92,9 +92,9 @@ protected:
 	}
 	BSTNode<_Ty>* Parent(BSTNode<_Ty>* t, BSTNode<_Ty>* key)const // 查找当前节点的父节点（需要与search函数配合使用）
 	{
-		if (t == nullptr || key == t) // 如果查找的是空树或者查找的是根节点，或者没有查找到目标节点
+		if (t == nullptr || key == t) // 如果查找的是空树或者查找的是根节点
 			return nullptr;
-		if (key == t->leftChild || key == t->rightChild) // 如果查找到该节点，则返回该节点的父节点位置
+		if (key == t->leftChild || key == t->rightChild) // 如果查找到该节点，则返回该节点的位置
 			return t;
 		if (key->data < t->data) // 左树查找
 			return Parent(t->leftChild, key);
